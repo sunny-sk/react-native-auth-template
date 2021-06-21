@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "run:android": "react-native run-android",
+    "run:ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
@@ -23,7 +23,8 @@
     "react-native-screens": "^2.9.0",
     "react-native-vector-icons": "^7.0.0",
     "react-redux": "^7.2.4",
-    "redux": "^4.1.0"
+    "redux": "^4.1.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -33,6 +34,7 @@
     "eslint": "^6.5.1",
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
+    "prettier": "^2.3.1",
     "react-test-renderer": "16.13.1"
   },
   "jest": {

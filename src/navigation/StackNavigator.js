@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 const stack = createStackNavigator();
 //importing screens
 import Signin from '../screens/Signin';
@@ -7,9 +7,8 @@ import Colors from '../constants/Colors';
 import Signup from '../screens/Signup';
 import ForgotPassword from '../screens/ForgotPassword';
 import HomeScreen from '../screens/HomeScreen';
-//context
-import {AuthContext} from '../context/AuthContext';
-import {_isAuthenticated} from '../helper/apiHelper';
+
+import { useSelector } from 'react-redux';
 
 const commonStyle = {
   headerStyle: {
@@ -21,37 +20,11 @@ const commonStyle = {
 };
 
 export function AuthStackScreens(props) {
-  const [state, authContext] = useContext(AuthContext);
-  const [loggedIn, setLoggedIn] = useState(false);
-  console.log('stack', state);
-  const bootstrapAsync = async () => {
-    let userToken;
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
-    try {
-      userToken = await _isAuthenticated();
-      if (userToken) {
-        authContext.signIn();
-      } else {
-        authContext.signOut();
-      }
-    } catch (e) {
-      // Restoring token failed
-    }
-  };
-
-  useEffect(() => {
-    bootstrapAsync();
-  }, []);
-  useEffect(() => {
-    if (state.loggedIn) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  }, [state.loggedIn]);
   return (
     <stack.Navigator>
-      {!state.loggedIn ? (
+      {!isLoggedIn ? (
         <>
           <stack.Screen
             name="signin"

@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   TextInput,
@@ -8,21 +8,13 @@ import {
   ActivityIndicator,
   StatusBar,
 } from 'react-native';
-import {AuthContext} from '../context/AuthContext';
 import Colors from '../constants/Colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Signup = (props) => {
-  const [state, authContext] = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(false);
-  const onSignIn = async () => {
-    try {
-      authContext.signUp();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [isLoading] = useState(false);
+  const onSignIn = async () => {};
   return (
     <>
       <StatusBar backgroundColor={Colors.primary} barStyle={'light-content'} />
@@ -102,7 +94,7 @@ const Signup = (props) => {
             </TouchableNativeFeedback>
           </View>
         ) : (
-          <View style={{marginTop: 10}}>
+          <View style={{ marginTop: 10 }}>
             <ActivityIndicator size="large" color={Colors.primary} />
           </View>
         )}
@@ -111,7 +103,7 @@ const Signup = (props) => {
           <TouchableNativeFeedback
             background={TouchableNativeFeedback.Ripple(
               'rgba(0,0,0,0.2)',
-              false,
+              false
             )}
             onPress={() => {
               props.navigation.navigate('signin');

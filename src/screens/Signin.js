@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   TextInput,
@@ -8,20 +8,24 @@ import {
   TouchableNativeFeedback,
   StatusBar,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Colors from '../constants/Colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {AuthContext} from '../context/AuthContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../actions/AuthActions';
 const Signin = (props) => {
-  const [state, authContext] = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(false);
-  const onLogin = async () => {
-    try {
-      authContext.signIn();
-    } catch (error) {
-      console.log(error);
-    }
+  const dispatch = useDispatch();
+  const { isLoggedIn, isLoading, user } = useSelector((state) => state.auth);
+  const navigation = useNavigation();
+  const onLogin = () => {
+    dispatch(login({ email: 'temp@gmail.com', password: 'password' }));
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+    }
+  }, [isLoggedIn, user, navigation]);
 
   return (
     <>
@@ -71,7 +75,7 @@ const Signin = (props) => {
             <TouchableNativeFeedback
               background={TouchableNativeFeedback.Ripple(
                 'rgba(0,0,0,0.2)',
-                false,
+                false
               )}
               onPress={() => {
                 props.navigation.navigate('forgotPassword');
@@ -99,7 +103,7 @@ const Signin = (props) => {
             </TouchableNativeFeedback>
           </View>
         ) : (
-          <View style={{marginTop: 10}}>
+          <View style={{ marginTop: 10 }}>
             <ActivityIndicator size="large" color={Colors.primary} />
           </View>
         )}
@@ -107,7 +111,7 @@ const Signin = (props) => {
           <TouchableNativeFeedback
             background={TouchableNativeFeedback.Ripple(
               'rgba(0,0,0,0.2)',
-              false,
+              false
             )}
             onPress={() => {
               props.navigation.navigate('signup');

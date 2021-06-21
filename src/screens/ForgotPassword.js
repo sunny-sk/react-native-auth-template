@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   TextInput,
-  TouchableOpacity,
   StyleSheet,
   Text,
   ActivityIndicator,
@@ -12,7 +11,7 @@ import {
 import Colors from '../constants/Colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const ForgotPassword = (props) => {
-  const [isLoadig, setIsLoading] = useState(false);
+  const [isLoadig] = useState(false);
   return (
     <>
       <StatusBar backgroundColor={Colors.primary} barStyle={'light-content'} />
@@ -45,7 +44,7 @@ const ForgotPassword = (props) => {
             </TouchableNativeFeedback>
           </View>
         ) : (
-          <View style={{marginTop: 10}}>
+          <View style={{ marginTop: 10 }}>
             <ActivityIndicator size="large" color={Colors.primary} />
           </View>
         )}

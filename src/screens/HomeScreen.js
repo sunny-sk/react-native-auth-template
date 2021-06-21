@@ -1,13 +1,11 @@
-import React, {useContext} from 'react';
-import {View, StyleSheet, Text, Button} from 'react-native';
-import {AuthContext} from '../context/AuthContext';
+import React from 'react';
+import { View, StyleSheet, Text, Button } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { logout } from '../actions/AuthActions';
 const HomeScreen = () => {
-  const [state, authContext] = useContext(AuthContext);
-  const onLogout = async () => {
-    try {
-      authContext.signOut();
-      console.log('Home', state);
-    } catch (error) {}
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    dispatch(logout());
   };
 
   return (
